@@ -10,11 +10,6 @@ npm run build     # astro check + astro build -> dist/
 npm run preview   # preview the production build
 ```
 
-## Current status (2026-09-04)
-
-
-
-
 ## License
 
 Code: MIT (see `LICENSE`). Knowledge-base content (once added) is intended for
