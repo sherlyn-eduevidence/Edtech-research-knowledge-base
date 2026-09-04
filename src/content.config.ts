@@ -82,7 +82,7 @@ const articles = defineCollection({
     url: z.string().url().optional(),
     open_access: z.boolean().optional(),
     publication_type: z.string().optional(),
-    study_type: z.enum(STUDY_TYPES).optional(), // "not reported" -> omit, don't guess
+    study_type: z.enum(STUDY_TYPES).optional(),
     peer_reviewed: z.boolean().optional(),
     sample_size: z.number().int().optional(), // omit if not reported — never invent
     created: timeField,
