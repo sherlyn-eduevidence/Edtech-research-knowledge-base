@@ -1,0 +1,131 @@
+# EdTech Research Knowledge Base — taxonomy
+#
+# The 5Es evidence framework below (efficacy, effectiveness, ethics, equity,
+# environment) and its three-tier indicators are drawn from and paraphrased
+# from Kucirkova, N., Schewe, O., Campbell, J., Lindroos Cermakova, A., &
+# Pitchford, N. (2025). Developing evidence indicators for evaluating K12
+# EdTech: towards a consensus on educational impact. Humanities and Social
+# Sciences Communications, 12, 947. https://doi.org/10.1057/s41599-025-05330-9
+# (open access, CC BY 4.0). Wording below is paraphrased, not copied verbatim
+# from the paper's tables — check the paper directly (Table 3, "Final Set of
+# Indicators") for the authors' exact wording before publishing anything
+# derived from it verbatim.
+#
+# NOTE on "viability": the paper's framework is the 5Es as EFFICACY,
+# EFFECTIVENESS, ETHICS, EQUITY, ENVIRONMENT — it does not include a sixth
+# "viability" dimension. The project brief lists "viability" as a 5Es
+# category, which does not match this source. I have not found "viability"
+# defined anywhere in the paper — flagging this discrepancy rather than
+# guessing a definition for it. Worth confirming directly with Prof.
+# Kucirkova whether "viability" is a newer/different addition to the
+# framework not reflected in this 2025 paper, or whether the brief meant one
+# of the five above.
+#
+# Each dimension below uses a THREE-TIER weight-of-evidence scale (not
+# subcategories in the sense the brief describes) — Tier 1 = lowest bar
+# (conceptual/theoretical evidence), Tier 2 = medium, Tier 3 = highest
+# (e.g. RCT-level for efficacy). This tiering is the paper's actual proposed
+# structure; the brief's "ask Prof. Kucirkova for the 5Es documents /
+# subcategories" instruction may refer to a different, more detailed
+# breakdown not in this summary paper — confirm before treating this as final.
+
+evidence_categories:
+  efficacy:
+    label: "Efficacy"
+    guiding_question: "Does the EdTech solution work (in controlled/ideal conditions)?"
+    source: "Kucirkova et al. 2025, Table 3"
+    tiers:
+      1: "Conceptual evidence: a research-grounded theory of change or logic model, backed by a literature review"
+      2: "Positive results from a quasi-experimental or correlational study conducted by an independent (third-party) researcher"
+      3: "Positive results from an experimental study with a control group and random assignment, conducted by an independent researcher"
+  effectiveness:
+    label: "Effectiveness"
+    guiding_question: "How well does the EdTech solution work in real classroom use?"
+    source: "Kucirkova et al. 2025, Table 3"
+    tiers:
+      1: "Pedagogical evidence: a thorough review of how the product's features align with effective instruction and the relevant national curriculum"
+      2: "Positive results from a rigorously designed usability or feasibility study showing contextual and cost fit"
+      3: "Positive results from a replication study, including evidence of cost-effectiveness and contextual fit at scale"
+  ethics:
+    label: "Ethics"
+    guiding_question: "How does the EdTech solution handle data, oversight, and accountability?"
+    source: "Kucirkova et al. 2025, Table 3"
+    tiers:
+      1: "Data is processed safely, user privacy follows age-appropriate design, and relevant legislation (e.g. GDPR, COPPA, FERPA) is clearly followed"
+      2: "The product supports secure, controlled data exchange/interoperability with other tools"
+      3: "Human oversight and accountability are transparently documented across every stage of the product's use and development"
+  equity:
+    label: "Equity"
+    guiding_question: "Who does the EdTech solution work for?"
+    source: "Kucirkova et al. 2025, Table 3"
+    tiers:
+      1: "Design includes inclusive features, shows awareness of bias, and is transparent/accountable in how it engages users"
+      2: "Inclusive design adaptable to at least two distinct learner groups, with active bias mitigation"
+      3: "Inclusive design accommodating multiple diverse learner groups, anticipates bias, and actively enables equitable implementation"
+  environment:
+    label: "Environment"
+    guiding_question: "Is the EdTech solution and its organisation environmentally sustainable?"
+    source: "Kucirkova et al. 2025, Table 3"
+    tiers:
+      1: "The tool's content and the organisation's public practices show initial steps toward environmental responsibility (e.g. acknowledging responsibilities, basic policies)"
+      2: "The organisation takes active steps to promote eco-awareness and takes responsibility for local and broader environmental impact"
+      3: "The organisation runs an environmental management system that actively minimises impact and promotes sustainability, locally and more broadly"
+  viability:
+    label: "Viability (UNVERIFIED — see note above)"
+    guiding_question: null
+    source: "Listed in the project brief (Section 6); NOT found in Kucirkova et al. 2025 — confirm with Prof. Kucirkova before using"
+    tiers: {}
+
+# EVER — the EdTech Evidence Evaluation Routine referenced in your brief's
+# Section 13. Full citation (from the reference list of the paper above):
+# Kucirkova, N., Brod, G., & Gaab, N. (2023). Applying the science of
+# learning to EdTech evidence evaluations using the EdTech Evidence
+# Evaluation Routine (EVER). npj Science of Learning, 8(1), 35–37.
+# I have not read this paper directly — only seen it cited — so I cannot
+# summarize its content yet; treat this as a citation to track down, not
+# a description of what EVER contains.
+
+# EdTech types — brief explicitly says "there can be more in papers, this is
+# a suggestion", so this list is expected to grow during ingestion, not stay fixed.
+edtech_types:
+  - learning-management-systems
+  - educational-apps
+  - adaptive-learning-systems
+  - intelligent-tutoring-systems
+  - digital-reading
+  - educational-games
+  - ar-vr
+  - learning-analytics
+  - robotics
+  - mobile-learning
+  - ai-in-education
+  - generative-ai
+  - digital-assessment
+
+# Controlled vocabulary for study_type — mirrors src/content.config.ts STUDY_TYPES.
+# Keep these two lists in sync manually until a shared source-of-truth generator exists.
+study_types:
+  - rct
+  - quasi-experimental
+  - longitudinal
+  - survey
+  - qualitative
+  - mixed-methods
+  - systematic-review
+  - meta-analysis
+  - design-based-research
+  - case-study
+  - other
+
+learning_outcomes:
+  - literacy
+  - numeracy
+  - subject-knowledge
+  - achievement
+  - engagement
+  - motivation
+  - metacognition
+  - self-regulation
+  - collaboration
+  - creativity
+  - wellbeing

@@ -1,0 +1,28 @@
+# Controlled vocabulary for the `study_type` frontmatter field.
+# Mirrors the STUDY_TYPES enum in src/content.config.ts — keep in sync.
+# Purpose (brief Section 12): prevent "RCT", "randomised trial",
+# "randomized controlled study" etc. from becoming separate categories.
+
+- id: rct
+  label: "Randomised controlled trial (RCT)"
+  note: "Only use if random allocation to conditions is established in the paper."
+- id: quasi-experimental
+  label: "Quasi-experimental study"
+- id: longitudinal
+  label: "Longitudinal study"
+- id: survey
+  label: "Survey"
+- id: qualitative
+  label: "Qualitative study"
+- id: mixed-methods
+  label: "Mixed methods"
+- id: systematic-review
+  label: "Systematic review"
+- id: meta-analysis
+  label: "Meta-analysis"
+- id: design-based-research
+  label: "Design-based research"
+- id: case-study
+  label: "Case study"
+- id: other
+  label: "Other / not covered above"

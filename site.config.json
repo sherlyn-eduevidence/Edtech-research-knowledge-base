@@ -1,0 +1,26 @@
+{
+  "name": "EdTech Research Knowledge Base",
+  "shortName": "EdTech KB",
+  "brandName": "EdTech Research Knowledge Base",
+  "description": "A living, open knowledge base of educational technology research — findings, evidence quality, and concepts, connected into a browsable and AI-readable graph.",
+  "lang": "en",
+  "url": "https://REPLACE_ORG.github.io/edtech-research",
+  "basePath": "/edtech-research",
+  "repoUrl": "https://github.com/REPLACE_ORG/edtech-research",
+  "issuesUrl": "https://github.com/REPLACE_ORG/edtech-research/issues",
+  "editor": {
+    "name": "Prof. Natalia Kucirkova",
+    "contactUrl": ""
+  },
+  "license": {
+    "name": "CC0 1.0",
+    "fullName": "CC0 1.0 Universal Public Domain Dedication",
+    "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "image": "/edtech-research/cc0.png",
+    "imageAlt": "CC0 Public Domain"
+  },
+  "theme": {
+    "background": "#0d1418",
+    "primary": "#15212b"
+  }
+}

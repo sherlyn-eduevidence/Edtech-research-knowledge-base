@@ -1,0 +1,68 @@
+# Search terms and inclusion strategy for discovering EdTech research.
+# Kept as a versioned file per brief Section 9, so the inclusion strategy is
+# transparent and reproducible (this is a genuine gap in the reference
+# repo — edtechdev/aied documents its ingestion criteria only as prose in
+# tooling/SKILL.md, not as a structured file like this one).
+
+scope_priority:
+  primary_window: "2024-2026"
+  expand: "progressively backwards; allow important older/foundational papers"
+
+inclusion_rule: >
+  A paper must have meaningful relevance to technology AND
+  education/learning/teaching/educational systems. Do not ingest a paper
+  merely because it mentions technology in passing.
+
+search_terms:
+  - educational technology
+  - edtech
+  - digital learning
+  - technology enhanced learning
+  - digital education
+  - educational software
+  - educational apps
+  - adaptive learning
+  - intelligent tutoring
+  - mobile learning
+  - digital reading
+  - educational games
+  - learning analytics
+  - virtual reality education
+  - augmented reality education
+  - ai education
+  - digital assessment
+  - learning management systems
+
+sources_to_investigate:
+  # Listed per brief Section 8. Not yet verified for API access / rate limits /
+  # licensing terms — confirm each before wiring into scripts/discover/.
+  - name: OpenAlex
+    verified: false
+  - name: Crossref
+    verified: false
+  - name: DOAJ
+    verified: false
+  - name: ERIC
+    verified: false
+  - name: PubMed
+    verified: false
+    note: "only where relevant to edtech/health-education overlap"
+  - name: arXiv
+    verified: false
+  - name: EdArXiv
+    verified: false
+  - name: institutional repositories
+    verified: false
+  - name: publisher open-access articles
+    verified: false
+
+geographic_coverage_targets:
+  # Brief Section 14 — avoid US/UK dominance. No enforcement mechanism yet;
+  # this is a target to check against once ~100 papers have been ingested
+  # (Phase 3 test run), not a hard constraint on discovery queries.
+  watch_for_underrepresentation:
+    - Africa
+    - Asia
+    - Latin America
+    - Middle East
+    - low- and middle-income countries
