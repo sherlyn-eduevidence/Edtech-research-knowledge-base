@@ -1,33 +1,5 @@
 # EdTech Research Knowledge Base — taxonomy
-#
-# The 5Es evidence framework below (efficacy, effectiveness, ethics, equity,
-# environment) and its three-tier indicators are drawn from and paraphrased
-# from Kucirkova, N., Schewe, O., Campbell, J., Lindroos Cermakova, A., &
-# Pitchford, N. (2025). Developing evidence indicators for evaluating K12
-# EdTech: towards a consensus on educational impact. Humanities and Social
-# Sciences Communications, 12, 947. https://doi.org/10.1057/s41599-025-05330-9
-# (open access, CC BY 4.0). Wording below is paraphrased, not copied verbatim
-# from the paper's tables — check the paper directly (Table 3, "Final Set of
-# Indicators") for the authors' exact wording before publishing anything
-# derived from it verbatim.
-#
-# NOTE on "viability": the paper's framework is the 5Es as EFFICACY,
-# EFFECTIVENESS, ETHICS, EQUITY, ENVIRONMENT — it does not include a sixth
-# "viability" dimension. The project brief lists "viability" as a 5Es
-# category, which does not match this source. I have not found "viability"
-# defined anywhere in the paper — flagging this discrepancy rather than
-# guessing a definition for it. Worth confirming directly with Prof.
-# Kucirkova whether "viability" is a newer/different addition to the
-# framework not reflected in this 2025 paper, or whether the brief meant one
-# of the five above.
-#
-# Each dimension below uses a THREE-TIER weight-of-evidence scale (not
-# subcategories in the sense the brief describes) — Tier 1 = lowest bar
-# (conceptual/theoretical evidence), Tier 2 = medium, Tier 3 = highest
-# (e.g. RCT-level for efficacy). This tiering is the paper's actual proposed
-# structure; the brief's "ask Prof. Kucirkova for the 5Es documents /
-# subcategories" instruction may refer to a different, more detailed
-# breakdown not in this summary paper — confirm before treating this as final.
+
 
 evidence_categories:
   efficacy:
@@ -76,17 +48,6 @@ evidence_categories:
     source: "Listed in the project brief (Section 6); NOT found in Kucirkova et al. 2025 — confirm with Prof. Kucirkova before using"
     tiers: {}
 
-# EVER — the EdTech Evidence Evaluation Routine referenced in your brief's
-# Section 13. Full citation (from the reference list of the paper above):
-# Kucirkova, N., Brod, G., & Gaab, N. (2023). Applying the science of
-# learning to EdTech evidence evaluations using the EdTech Evidence
-# Evaluation Routine (EVER). npj Science of Learning, 8(1), 35–37.
-# I have not read this paper directly — only seen it cited — so I cannot
-# summarize its content yet; treat this as a citation to track down, not
-# a description of what EVER contains.
-
-# EdTech types — brief explicitly says "there can be more in papers, this is
-# a suggestion", so this list is expected to grow during ingestion, not stay fixed.
 edtech_types:
   - learning-management-systems
   - educational-apps
@@ -102,8 +63,7 @@ edtech_types:
   - generative-ai
   - digital-assessment
 
-# Controlled vocabulary for study_type — mirrors src/content.config.ts STUDY_TYPES.
-# Keep these two lists in sync manually until a shared source-of-truth generator exists.
+
 study_types:
   - rct
   - quasi-experimental

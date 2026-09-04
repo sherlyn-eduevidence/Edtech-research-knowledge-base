@@ -1,8 +1,4 @@
-# Search terms and inclusion strategy for discovering EdTech research.
-# Kept as a versioned file per brief Section 9, so the inclusion strategy is
-# transparent and reproducible (this is a genuine gap in the reference
-# repo — edtechdev/aied documents its ingestion criteria only as prose in
-# tooling/SKILL.md, not as a structured file like this one).
+
 
 scope_priority:
   primary_window: "2024-2026"
@@ -34,8 +30,8 @@ search_terms:
   - learning management systems
 
 sources_to_investigate:
-  # Listed per brief Section 8. Not yet verified for API access / rate limits /
-  # licensing terms — confirm each before wiring into scripts/discover/.
+  # Listed per brief Section 8.
+
   - name: OpenAlex
     verified: false
   - name: Crossref
@@ -57,9 +53,7 @@ sources_to_investigate:
     verified: false
 
 geographic_coverage_targets:
-  # Brief Section 14 — avoid US/UK dominance. No enforcement mechanism yet;
-  # this is a target to check against once ~100 papers have been ingested
-  # (Phase 3 test run), not a hard constraint on discovery queries.
+
   watch_for_underrepresentation:
     - Africa
     - Asia

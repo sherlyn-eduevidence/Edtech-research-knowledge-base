@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import siteConfig from '../../site.config.json';
+ 
+const articles = await getCollection('articles');
+const concepts = await getCollection('concepts');
+---
+ 
+<BaseLayout title={siteConfig.name}>
+  <h1>{siteConfig.name}</h1>
+  <p>{siteConfig.description}</p>
+ 
+  <section>
+    <h2>Articles ({articles.length})</h2>
+    <ul>
+      {articles.map((article: any) => (
+        <li>
+          <a href={`${siteConfig.basePath}/articles/${article.id}`}>{article.data.title}</a>
+        </li>
+      ))}
+    </ul>
+  </section>
+ 
+  <section>
+    <h2>Concepts ({concepts.length})</h2>
+    <ul>
+      {concepts.map((concept: any) => (
+        <li>
+          <a href={`${siteConfig.basePath}/concepts/${concept.id}`}>{concept.data.title}</a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>

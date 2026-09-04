@@ -17,7 +17,7 @@ tool_names: []
 subjects: ["mathematics"]
 outcomes: ["numeracy", "engagement"]
 evidence_categories: ["effectiveness"]
-evidence_tier: { dimension: "efficacy", tier: 3 } # e.g. RCT with control + random assignment = efficacy tier 3
+evidence_tier: { dimension: "efficacy", tier: 3 }
 tags: ["adaptive-learning", "primary-education"]
 sources: ["raw/papers/EXAMPLE-not-a-real-source.md"]
 confidence: medium
@@ -25,7 +25,7 @@ created: "2026-09-04T09:00:00+01:00"
 updated: ""
 ---
 
-> **This file is a structural template, not a real research summary.** It
+> It
 > exists to show the intended article schema and section structure so a
 > contributor (human or AI) can see the target shape before real papers are
 > ingested. Delete this file once the first real article is added, or keep

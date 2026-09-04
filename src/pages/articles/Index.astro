@@ -1,0 +1,65 @@
+---
+import siteConfig from '../../../site.config.json';
+ 
+interface Props {
+  title: string;
+  description?: string;
+}
+ 
+const { title, description = siteConfig.description } = Astro.props;
+const pageTitle = title === siteConfig.name ? title : `${title} — ${siteConfig.name}`;
+---
+ 
+<!doctype html>
+<html lang={siteConfig.lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href={siteConfig.basePath + '/'}>{siteConfig.shortName}</a>
+      <nav>
+        <a href={siteConfig.basePath + '/articles'}>Articles</a>
+        <a href={siteConfig.basePath + '/concepts'}>Concepts</a>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <p>
+        Content licensed <a href={siteConfig.license.url}>{siteConfig.license.name}</a>.
+        <a href={siteConfig.repoUrl}>Source on GitHub</a>.
+      </p>
+    </footer>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 46rem;
+        margin: 0 auto;
+        padding: 1.5rem;
+        line-height: 1.6;
+      }
+      .site-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+      .site-header nav a {
+        margin-left: 1rem;
+      }
+      .site-footer {
+        margin-top: 3rem;
+        padding-top: 1rem;
+        border-top: 1px solid #ddd;
+        font-size: 0.85rem;
+        color: #555;
+      }
+    </style>
+  </body>
+</html>
