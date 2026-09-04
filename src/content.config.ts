@@ -55,7 +55,7 @@ const articles = defineCollection({
     year: z.number().int().optional(),
     journal: z.string().optional(),
     doi: z.string().optional(),
-    url: z.union([z.string().url(), z.literal('')]).optional(),
+    url: z.string().url().or(z.literal('')).optional(),
     open_access: z.boolean().optional(),
     publication_type: z.string().optional(),
     study_type: z.enum(STUDY_TYPES).optional(),
