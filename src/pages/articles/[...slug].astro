@@ -1,0 +1,79 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import siteConfig from '../../../site.config.json';
+import { tierClass, tierLabel } from '../../lib/tiers';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  return articles.map((article) => ({
+    params: { slug: article.id },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+const d = article.data;
+---
+
+<BaseLayout title={d.title}>
+  <p class="meta"><a class="plain" href={`${siteConfig.basePath}/articles`}>← All articles</a></p>
+  <h1>{d.title}</h1>
+
+  <dl class="fact-grid">
+    {d.authors?.length ? <><dt>Authors</dt><dd>{d.authors.join(', ')}</dd></> : null}
+    {d.year ? <><dt>Year</dt><dd>{d.year}</dd></> : null}
+    {d.journal ? <><dt>Source</dt><dd>{d.journal}</dd></> : null}
+    {d.doi ? <><dt>DOI</dt><dd><a href={`https://doi.org/${d.doi}`}>{d.doi}</a></dd></> : null}
+    {d.study_type ? <><dt>Method</dt><dd>{d.study_type}</dd></> : null}
+    {d.sample_size ? <><dt>Sample</dt><dd>{d.sample_size}</dd></> : null}
+    {d.countries?.length ? <><dt>Countries</dt><dd>{d.countries.join(', ')}</dd></> : null}
+    {d.education_levels?.length ? <><dt>Education level</dt><dd>{d.education_levels.join(', ')}</dd></> : null}
+  </dl>
+
+  {d.evidence_tier && (
+    <p>
+      <span class={tierClass(d.evidence_tier.tier)}>
+        {tierLabel(d.evidence_tier.dimension, d.evidence_tier.tier)}
+      </span>
+    </p>
+  )}
+
+  <div class="body">
+    <Content />
+  </div>
+
+  <p class="meta confidence">
+    Confidence: {d.confidence ?? 'medium'}
+    {d.updated ? ` · Last checked ${new Date(d.updated).toLocaleDateString()}` : ''}
+  </p>
+
+  <style>
+    .fact-grid {
+      display: grid;
+      grid-template-columns: max-content 1fr;
+      column-gap: 1.5rem;
+      row-gap: 0.4rem;
+      margin: 1.5rem 0;
+      max-width: var(--measure);
+    }
+    .fact-grid dt {
+      color: var(--red);
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+    .fact-grid dd {
+      margin: 0;
+    }
+    .body {
+      margin-top: 2rem;
+    }
+    .body :global(h2) {
+      margin-top: 2.5rem;
+    }
+    .confidence {
+      margin-top: 3rem;
+    }
+  </style>
+</BaseLayout>

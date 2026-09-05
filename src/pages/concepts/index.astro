@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import siteConfig from '../../../site.config.json';
+
+const concepts = (await getCollection('concepts')).sort((a, b) =>
+  a.data.title.localeCompare(b.data.title)
+);
+---
+
+<BaseLayout title="Concepts">
+  <h1>Concepts</h1>
+  <p class="meta">
+    {concepts.length} synthesised topic page{concepts.length === 1 ? '' : 's'}, each drawing on
+    multiple linked articles.
+  </p>
+
+  {concepts.length === 0 ? (
+    <p>None yet.</p>
+  ) : (
+    <ul class="entry-list">
+      {concepts.map((concept) => (
+        <li>
+          <a class="plain entry-title" href={`${siteConfig.basePath}/concepts/${concept.id}`}>
+            {concept.data.title}
+          </a>
+        </li>
+      ))}
+    </ul>
+  )}
+
+  <style>
+    .entry-list {
+      list-style: none;
+      padding: 0;
+      margin: 2rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .entry-title {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 1.15rem;
+      display: block;
+    }
+  </style>
+</BaseLayout>

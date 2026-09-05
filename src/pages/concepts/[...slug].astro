@@ -1,0 +1,36 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import siteConfig from '../../../site.config.json';
+
+export async function getStaticPaths() {
+  const concepts = await getCollection('concepts');
+  return concepts.map((concept) => ({
+    params: { slug: concept.id },
+    props: { concept },
+  }));
+}
+
+const { concept } = Astro.props;
+const { Content } = await render(concept);
+const d = concept.data;
+---
+
+<BaseLayout title={d.title}>
+  <p class="meta"><a class="plain" href={`${siteConfig.basePath}/concepts`}>← All concepts</a></p>
+  <h1>{d.title}</h1>
+  {d.tags?.length ? <p class="meta">{d.tags.join(' · ')}</p> : null}
+
+  <div class="body">
+    <Content />
+  </div>
+
+  <style>
+    .body {
+      margin-top: 2rem;
+    }
+    .body :global(h2) {
+      margin-top: 2.5rem;
+    }
+  </style>
+</BaseLayout>

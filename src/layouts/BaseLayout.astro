@@ -1,15 +1,20 @@
 ---
+import '../styles/global.css';
 import siteConfig from '../../site.config.json';
- 
+
 interface Props {
   title: string;
   description?: string;
 }
- 
+
 const { title, description = siteConfig.description } = Astro.props;
 const pageTitle = title === siteConfig.name ? title : `${title} — ${siteConfig.name}`;
+const nav = [
+  { href: '/articles', label: 'Articles' },
+  { href: '/concepts', label: 'Concepts' },
+];
 ---
- 
+
 <!doctype html>
 <html lang={siteConfig.lang}>
   <head>
@@ -17,48 +22,73 @@ const pageTitle = title === siteConfig.name ? title : `${title} — ${siteConfig
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="sitemap" href={`${siteConfig.basePath}/sitemap-index.xml`} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header">
-      <a class="brand" href={siteConfig.basePath + '/'}>{siteConfig.shortName}</a>
-      <nav>
-        <a href={siteConfig.basePath + '/articles'}>Articles</a>
-        <a href={siteConfig.basePath + '/concepts'}>Concepts</a>
-      </nav>
+      <div class="container site-header-inner">
+        <a class="plain wordmark" href={`${siteConfig.basePath}/`}>{siteConfig.shortName}</a>
+        <nav aria-label="Primary">
+          {nav.map((item) => (
+            <a class="plain" href={`${siteConfig.basePath}${item.href}`}>{item.label}</a>
+          ))}
+        </nav>
+      </div>
     </header>
-    <main>
+    <main id="main" class="container">
       <slot />
     </main>
     <footer class="site-footer">
-      <p>
-        Content licensed <a href={siteConfig.license.url}>{siteConfig.license.name}</a>.
-        <a href={siteConfig.repoUrl}>Source on GitHub</a>.
-      </p>
+      <div class="container">
+        <p>
+          Summaries and synthesis released under
+          <a href={siteConfig.license.url}>{siteConfig.license.name}</a>.
+          Source text remains with original publishers. ·
+          <a href={siteConfig.repoUrl}>Source on GitHub</a>
+        </p>
+      </div>
     </footer>
     <style>
-      body {
-        font-family: system-ui, sans-serif;
-        max-width: 46rem;
-        margin: 0 auto;
-        padding: 1.5rem;
-        line-height: 1.6;
-      }
       .site-header {
+        padding: 1.5rem 0;
+      }
+      .site-header-inner {
         display: flex;
         justify-content: space-between;
-        align-items: center;
-        margin-bottom: 2rem;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .wordmark {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 1.25rem;
+        color: var(--red);
+      }
+      .site-header nav {
+        display: flex;
+        gap: 1.75rem;
       }
       .site-header nav a {
-        margin-left: 1rem;
+        font-weight: 500;
+      }
+      main {
+        min-height: 60vh;
+        padding-bottom: 4rem;
       }
       .site-footer {
-        margin-top: 3rem;
-        padding-top: 1rem;
-        border-top: 1px solid #ddd;
+        padding: 2rem 0 3rem;
+      }
+      .site-footer p {
+        max-width: none;
         font-size: 0.85rem;
-        color: #555;
       }
     </style>
   </body>
