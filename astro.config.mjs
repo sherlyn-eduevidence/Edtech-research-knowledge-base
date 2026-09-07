@@ -4,6 +4,9 @@ import sitemap from '@astrojs/sitemap';
 import { readFileSync } from 'node:fs';
 
 
+import starlight from '@astrojs/starlight';
+
+
 const siteConfig = JSON.parse(readFileSync(new URL('./site.config.json', import.meta.url), 'utf-8'));
 
 const origin = siteConfig.url.replace(new RegExp(`${siteConfig.basePath}$`), '');
@@ -13,5 +16,5 @@ export default defineConfig({
   base: siteConfig.basePath,
   output: 'static',
   trailingSlash: 'ignore',
-  integrations: [pagefind(), sitemap()],
+  integrations: [pagefind(), sitemap(), starlight()],
 });
