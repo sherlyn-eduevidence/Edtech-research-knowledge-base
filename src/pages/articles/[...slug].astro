@@ -32,12 +32,32 @@ const d = article.data;
     {d.education_levels?.length ? <><dt>Education level</dt><dd>{d.education_levels.join(', ')}</dd></> : null}
   </dl>
 
-  {d.evidence_tier && (
-    <p>
-      <span class={tierClass(d.evidence_tier.tier)}>
-        {tierLabel(d.evidence_tier.dimension, d.evidence_tier.tier)}
-      </span>
-    </p>
+  {d.fives && Object.entries(d.fives).some(([, tier]) => tier) && (
+    <div class="evidence-block">
+      <h3 class="evidence-heading">5Es evidence</h3>
+      <p class="tier-row">
+        {Object.entries(d.fives)
+          .filter(([, tier]) => tier)
+          .map(([dimension, tier]) => (
+            <span class={tierClass(Number(String(tier).replace('L', '')))}>
+              {tierLabel(dimension, Number(String(tier).replace('L', '')))}
+            </span>
+          ))}
+      </p>
+    </div>
+  )}
+
+  {d.ever_scores && (
+    <div class="evidence-block">
+      <h3 class="evidence-heading">EVER rigor scores</h3>
+      <p class="meta">Provisional pending confirmed EVER matrix labels from Kucirkova.</p>
+      <dl class="fact-grid">
+        <dt>Method soundness</dt><dd>{d.ever_scores.method_soundness}/5</dd>
+        <dt>Result strength</dt><dd>{d.ever_scores.result_strength}/5</dd>
+        <dt>Generalizability</dt><dd>{d.ever_scores.generalizability}/5</dd>
+        <dt>Ethics &amp; transparency</dt><dd>{d.ever_scores.ethics_transparency}/5</dd>
+      </dl>
+    </div>
   )}
 
   <div class="body">
@@ -74,6 +94,20 @@ const d = article.data;
     }
     .confidence {
       margin-top: 3rem;
+    }
+    .evidence-block {
+      margin: 1.5rem 0;
+    }
+    .evidence-heading {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+    .tier-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0;
     }
   </style>
 </BaseLayout>

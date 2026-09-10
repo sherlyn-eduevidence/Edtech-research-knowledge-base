@@ -105,6 +105,8 @@ const articles = defineCollection({
   generalizability: z.number().min(0).max(5),
   ethics_transparency: z.number().min(0).max(5)
 }).optional(),
+
+    ...sharedMeta,
   }),
 });
 

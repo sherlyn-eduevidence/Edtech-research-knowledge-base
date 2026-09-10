@@ -1,51 +1,26 @@
 {
-
   "name": "EdTech Research Knowledge Base",
-
   "shortName": "EdTech KB",
-
   "brandName": "EdTech Research Knowledge Base",
-
-  "description": "",
-
+  "description": "A living knowledge base of research on educational technology, learning and evidence.",
   "lang": "en",
-
-  "url": "https://REPLACE_ORG.github.io/edtech-research",
-
-  "basePath": "/edtech-research",
-
-  "repoUrl": "https://github.com/REPLACE_ORG/edtech-research",
-
-  "issuesUrl": "https://github.com/REPLACE_ORG/edtech-research/issues",
-
+  "url": "https://sherlyn-eduevidence.github.io/Edtech-research-knowledge-base",
+  "basePath": "/Edtech-research-knowledge-base",
+  "repoUrl": "https://github.com/sherlyn-eduevidence/Edtech-research-knowledge-base",
+  "issuesUrl": "https://github.com/sherlyn-eduevidence/Edtech-research-knowledge-base/issues",
   "editor": {
-
     "name": "Prof. Natalia Kucirkova",
-
-    "contactUrl": ""
-
+    "contactUrl": "mailto:natalia.kucirkova@uis.no"
   },
-
   "license": {
-
     "name": "CC0 1.0",
-
     "fullName": "CC0 1.0 Universal Public Domain Dedication",
-
     "url": "https://creativecommons.org/publicdomain/zero/1.0/",
-
-    "image": "/edtech-research/cc0.png",
-
+    "image": "/Edtech-research-knowledge-base/cc0.png",
     "imageAlt": "CC0 Public Domain"
-
   },
-
   "theme": {
-
-    "background": "#0d1418",
-
-    "primary": "#15212b"
-
+    "background": "#ffffff",
+    "primary": "#c72810b"
   }
-
 }
