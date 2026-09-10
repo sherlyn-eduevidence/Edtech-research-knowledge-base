@@ -1,35 +1,192 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
-import siteConfig from '../../site.config.json';
- 
-const articles = await getCollection('articles');
-const concepts = await getCollection('concepts');
+
+const allArticles = await getCollection('articles');
+const allConcepts = await getCollection('concepts');
+
+const recentArticles = allArticles
+  .sort((a, b) => b.data.year - a.data.year)
+  .slice(0, 5);
+
+const conceptsWithCounts = allConcepts.map(concept => {
+  const count = allArticles.filter(article => 
+    article.data.tags && article.data.tags.includes(concept.id)
+  ).length;
+  return { ...concept, count };
+});
 ---
- 
-<BaseLayout title={siteConfig.name}>
-  <h1>{siteConfig.name}</h1>
-  <p>{siteConfig.description}</p>
- 
-  <section>
-    <h2>Articles ({articles.length})</h2>
-    <ul>
-      {articles.map((article: any) => (
-        <li>
-          <a href={`${siteConfig.basePath}/articles/${article.id}`}>{article.data.title}</a>
-        </li>
-      ))}
-    </ul>
-  </section>
- 
-  <section>
-    <h2>Concepts ({concepts.length})</h2>
-    <ul>
-      {concepts.map((concept: any) => (
-        <li>
-          <a href={`${siteConfig.basePath}/concepts/${concept.id}`}>{concept.data.title}</a>
-        </li>
-      ))}
-    </ul>
-  </section>
-</BaseLayout>
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EdTech Research Knowledge Base</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --red: #c8102e;
+      --white: #ffffff;
+      --font-display: "Source Serif 4", Georgia, serif;
+      --font-body: "IBM Plex Sans", system-ui, sans-serif;
+      --measure: 40rem;
+      --page-max: 68rem;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--white);
+      color: var(--red);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+
+    .container {
+      max-width: var(--page-max);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    a { color: var(--red); text-decoration: underline; text-underline-offset: 0.15em; }
+    a.plain { text-decoration: none; }
+
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      line-height: 1.1;
+      margin: 0;
+    }
+
+    header.site-header { background: var(--red); padding: 1.25rem 0; }
+    .site-header-inner { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 1rem; }
+    .wordmark { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; color: var(--white); }
+    .site-header nav { display: flex; gap: 2rem; }
+    .site-header nav a { color: var(--white); text-decoration: none; font-weight: 500; }
+    .site-header nav a[aria-current="page"] { font-weight: 600; text-decoration: underline; text-underline-offset: 0.25em; }
+
+    .search-row { padding: 2.5rem 0 0; }
+    .search-row form { display: flex; gap: 0; }
+    .search-row input[type="search"] {
+      flex: 1; font: inherit; font-size: 1.05rem; color: var(--red);
+      background: var(--white); border: none; border-bottom: 3px solid var(--red);
+      padding: 0.6rem 0.1rem; outline: none;
+    }
+    .search-row input[type="search"]::placeholder { color: var(--red); opacity: 0.55; }
+    .search-row button {
+      font: inherit; font-weight: 600; background: var(--red);
+      color: var(--white); border: none; padding: 0.6rem 1.5rem; cursor: pointer;
+    }
+
+    .hero { padding: 3.5rem 0 2.5rem; }
+    .hero h1 { font-size: clamp(2.25rem, 5vw, 3.75rem); max-width: 22ch; }
+    .hero p { font-size: 1.15rem; max-width: var(--measure); margin: 1.25rem 0 0; }
+
+    .rule { height: 0.4rem; background: var(--red); margin: 3rem 0; }
+
+    section.listing h2 { font-size: 1rem; text-transform: none; font-weight: 600; font-family: var(--font-body); margin-bottom: 1.75rem; }
+    .entry-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+    .entry-list li { padding: 1.5rem 0; }
+    .entry-list li + li { border-top: none; }
+    .entry-title { font-family: var(--font-display); font-weight: 600; font-size: 1.3rem; display: block; margin-bottom: 0.35rem; }
+    .entry-meta { font-size: 0.9rem; }
+    .entry-meta .dot { margin: 0 0.5em; }
+
+    .tier { display: inline-flex; align-items: center; font-weight: 600; font-size: 0.78rem; padding: 0.2em 0.7em; }
+    .tier-fill { background: var(--red); color: var(--white); }
+    .tier-outline { background: var(--white); color: var(--red); text-decoration: underline; }
+
+    footer.site-footer { background: var(--red); color: var(--white); padding: 2rem 0; margin-top: 4rem; }
+    footer.site-footer a { color: var(--white); }
+    footer.site-footer p { margin: 0; font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container site-header-inner">
+      <a class="plain wordmark" href="/">EdTech KB</a>
+      <nav aria-label="Primary">
+        <a href="/articles" aria-current="page">Articles</a>
+        <a href="/concepts">Concepts</a>
+        <a href="/search">Search</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="search-row">
+      <form role="search" action="/search">
+        <input type="search" name="q" placeholder="Search titles, authors, concepts, tags…" />
+        <button type="submit">Search</button>
+      </form>
+    </div>
+
+    <div class="hero">
+      <h1>A living knowledge base of research on educational technology.</h1>
+      <p>
+        Summaries and evidence grading for EdTech research, organised into
+        searchable concepts and linked back to original sources.
+      </p>
+    </div>
+
+    <div class="rule"></div>
+
+    <section class="listing">
+      <h2>Recently added articles</h2>
+      <ul class="entry-list">
+        {recentArticles.map(article => (
+          <li>
+            <a class="plain entry-title" href={`/articles/${article.id}`}>{article.data.title}</a>
+            <p class="entry-meta">
+              {article.data.authors[0]} {article.data.authors.length > 1 && 'et al.'}, {article.data.year} 
+              <span class="dot">·</span> 
+              {article.data.study_type.join(', ').replace(/_/g, ' ')} 
+              <span class="dot">·</span>
+              
+              {article.data.fives?.efficacy && (
+                 <span class="tier tier-fill">Efficacy · {article.data.fives.efficacy}</span>
+              )}
+              {article.data.confidence && (
+                 <span class="tier tier-outline">Confidence: {article.data.confidence}</span>
+              )}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <div class="rule"></div>
+
+    <section class="listing">
+      <h2>Concepts</h2>
+      <ul class="entry-list">
+        {conceptsWithCounts.map(concept => (
+          <li>
+            <a class="plain entry-title" href={`/concepts/${concept.id}`}>{concept.data.title}</a>
+            <p class="entry-meta">{concept.count} linked articles</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>
+        Summaries and synthesis released under CC0 1.0. Source text remains with original publishers.
+        · <a href="https://github.com/edtechdev/aied">Source on GitHub</a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
