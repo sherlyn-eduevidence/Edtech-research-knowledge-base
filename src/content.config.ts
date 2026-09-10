@@ -2,6 +2,17 @@ import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { readdirSync } from 'node:fs';
 
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+  integrations: [
+    starlight({
+      title: 'EdTech Research Knowledge Base',
+    }),
+  ],
+});
+
 const articlesDir = 'content/articles';
 const conceptsDir = 'content/concepts';
 
@@ -49,7 +60,7 @@ const outcomeTypes = enumList(
 
 const fivesTier = z.enum(['L1', 'L2', 'L3']).optional();
 
-// Shared across articles and concepts.
+
 const sharedMeta = {
   countries: z.array(z.string()).default([]),
   education_levels: educationLevels,
